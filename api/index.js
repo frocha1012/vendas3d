@@ -1,6 +1,11 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import pool from '../server/database.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -303,6 +308,22 @@ app.get('/api/summary', async (req, res) => {
     console.error('Error fetching summary:', error);
     res.status(500).json({ error: 'Failed to fetch summary' });
   }
+});
+
+// Handle static file serving for React app
+const clientBuildPath = path.join(__dirname, '../client/dist');
+
+// Serve static files from React build
+app.use(express.static(clientBuildPath));
+
+// Catch-all handler: serve React app for non-API routes
+app.get('*', (req, res) => {
+  // Don't serve index.html for API routes
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ error: 'API endpoint not found' });
+  }
+  // Serve React app
+  res.sendFile(path.join(clientBuildPath, 'index.html'));
 });
 
 // Export for Vercel serverless
