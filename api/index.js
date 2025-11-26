@@ -12,6 +12,30 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Test database connection endpoint
+app.get('/api/test-db', async (req, res) => {
+  try {
+    const [rows] = await pool.execute('SELECT 1 as test');
+    res.json({ 
+      success: true, 
+      message: 'Database connected',
+      dbHost: process.env.DB_HOST,
+      dbUser: process.env.DB_USER,
+      dbName: process.env.DB_NAME
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false,
+      error: error.message,
+      code: error.code,
+      dbHost: process.env.DB_HOST,
+      dbUser: process.env.DB_USER,
+      dbName: process.env.DB_NAME,
+      fullError: error.toString()
+    });
+  }
+});
+
 // ============ BUSINESS SETTINGS ============
 app.get('/api/settings', async (req, res) => {
   try {
