@@ -75,3 +75,4 @@ Check Vercel function logs:
 - Click "Functions" tab
 - Check the logs for errors
 
+

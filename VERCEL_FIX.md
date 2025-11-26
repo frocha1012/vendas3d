@@ -46,3 +46,4 @@ After redeploy, test:
 - `https://your-app.vercel.app/api/summary` - Should return JSON
 - `https://your-app.vercel.app/` - Should show React app
 
+

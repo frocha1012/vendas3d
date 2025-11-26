@@ -87,14 +87,14 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
-      <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 mb-3 sm:mb-4">Add New Item</h2>
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4 sm:p-6 transition-colors">
+      <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-3 sm:mb-4">Add New Item</h2>
       
       <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         {/* Basic Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="item-name" className="block text-sm font-medium text-slate-700 mb-1">
+            <label htmlFor="item-name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Item Name *
             </label>
             <input
@@ -102,7 +102,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               placeholder="e.g., Boneco (Corpo)"
               disabled={isSubmitting}
               required
@@ -110,7 +110,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
           </div>
           
           <div>
-            <label htmlFor="item-color" className="block text-sm font-medium text-slate-700 mb-1">
+            <label htmlFor="item-color" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Color
             </label>
             <input
@@ -118,7 +118,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
               type="text"
               value={color}
               onChange={(e) => setColor(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               placeholder="e.g., White, Black"
               disabled={isSubmitting}
             />
@@ -135,7 +135,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
               id="filament"
               value={filamentId}
               onChange={(e) => setFilamentId(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               disabled={isSubmitting}
             >
               <option value="">Select filament...</option>
@@ -160,7 +160,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
               min="0"
               value={gramsUsed}
               onChange={(e) => setGramsUsed(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               placeholder="0.00"
               disabled={isSubmitting}
             />
@@ -170,7 +170,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
         {/* Labor Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="print-time" className="block text-sm font-medium text-slate-700 mb-1">
+            <label htmlFor="print-time" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Print Time (hours)
             </label>
             <input
@@ -180,14 +180,14 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
               min="0"
               value={printTimeHours}
               onChange={(e) => handlePrintTimeChange(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               placeholder="0.00"
               disabled={isSubmitting}
             />
           </div>
           
           <div>
-            <label htmlFor="hourly-rate" className="block text-sm font-medium text-slate-700 mb-1">
+            <label htmlFor="hourly-rate" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Hourly Rate (€)
             </label>
             <input
@@ -197,7 +197,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
               min="0"
               value={hourlyRate}
               onChange={(e) => setHourlyRate(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               placeholder={settings.default_hourly_rate || "1.00"}
               disabled={isSubmitting}
             />
@@ -207,7 +207,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
         {/* Electricity & Profit */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="electricity-kw" className="block text-sm font-medium text-slate-700 mb-1">
+            <label htmlFor="electricity-kw" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Electricity (kW)
             </label>
             <input
@@ -217,17 +217,17 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
               min="0"
               value={electricityKw}
               onChange={(e) => setElectricityKw(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               placeholder="Auto-calculated"
               disabled={isSubmitting}
             />
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               Cost: €{(electricityKw ? parseFloat(electricityKw) * (settings.electricity_cost_per_kwh || 0.25) : 0).toFixed(4)}/kWh
             </p>
           </div>
           
           <div>
-            <label htmlFor="profit-margin" className="block text-sm font-medium text-slate-700 mb-1">
+            <label htmlFor="profit-margin" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Profit Margin (%)
             </label>
             <input
@@ -237,7 +237,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
               min="0"
               value={profitMargin}
               onChange={(e) => setProfitMargin(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               placeholder={settings.default_profit_margin || "50"}
               disabled={isSubmitting}
             />
@@ -246,14 +246,14 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
 
         {/* Notes */}
         <div>
-          <label htmlFor="notes" className="block text-sm font-medium text-slate-700 mb-1">
-            Notes (optional)
-          </label>
-          <textarea
-            id="notes"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+            <label htmlFor="notes" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+              Notes (optional)
+            </label>
+            <textarea
+              id="notes"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
             rows="2"
             placeholder="Additional notes..."
             disabled={isSubmitting}

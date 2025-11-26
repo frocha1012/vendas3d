@@ -23,28 +23,28 @@ function PriceCalculator({ formData, settings, selectedFilament }) {
   const finalPrice = totalCostNoProfit * (1 + profitMargin / 100);
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-5 space-y-3">
-      <h3 className="text-lg font-semibold text-slate-800 mb-3">Price Calculator</h3>
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 border-2 border-blue-200 dark:border-blue-800 rounded-lg p-5 space-y-3 transition-colors">
+      <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-3">Price Calculator</h3>
       
       <div className="grid grid-cols-2 gap-3 text-sm">
-        <div className="bg-white rounded p-2">
-          <div className="text-xs text-slate-600">Material Cost</div>
-          <div className="font-bold text-blue-600">€{materialCost.toFixed(2)}</div>
+        <div className="bg-white dark:bg-slate-700 rounded p-2 transition-colors">
+          <div className="text-xs text-slate-600 dark:text-slate-400">Material Cost</div>
+          <div className="font-bold text-blue-600 dark:text-blue-400">€{materialCost.toFixed(2)}</div>
         </div>
         
-        <div className="bg-white rounded p-2">
-          <div className="text-xs text-slate-600">Labor Cost</div>
-          <div className="font-bold text-green-600">€{laborCost.toFixed(2)}</div>
+        <div className="bg-white dark:bg-slate-700 rounded p-2 transition-colors">
+          <div className="text-xs text-slate-600 dark:text-slate-400">Labor Cost</div>
+          <div className="font-bold text-green-600 dark:text-green-400">€{laborCost.toFixed(2)}</div>
         </div>
         
-        <div className="bg-white rounded p-2">
-          <div className="text-xs text-slate-600">Electricity Cost</div>
-          <div className="font-bold text-orange-600">€{electricityCost.toFixed(2)}</div>
+        <div className="bg-white dark:bg-slate-700 rounded p-2 transition-colors">
+          <div className="text-xs text-slate-600 dark:text-slate-400">Electricity Cost</div>
+          <div className="font-bold text-orange-600 dark:text-orange-400">€{electricityCost.toFixed(2)}</div>
         </div>
         
-        <div className="bg-white rounded p-2">
-          <div className="text-xs text-slate-600">Total Cost</div>
-          <div className="font-bold text-slate-700">€{totalCostNoProfit.toFixed(2)}</div>
+        <div className="bg-white dark:bg-slate-700 rounded p-2 transition-colors">
+          <div className="text-xs text-slate-600 dark:text-slate-400">Total Cost</div>
+          <div className="font-bold text-slate-700 dark:text-slate-300">€{totalCostNoProfit.toFixed(2)}</div>
         </div>
       </div>
 
@@ -54,7 +54,7 @@ function PriceCalculator({ formData, settings, selectedFilament }) {
       </div>
 
       {(formData?.grams_used && !selectedFilament) && (
-        <div className="text-xs text-amber-600 bg-amber-50 p-2 rounded">
+        <div className="text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 p-2 rounded transition-colors">
           ⚠️ Select a filament to calculate material cost
         </div>
       )}

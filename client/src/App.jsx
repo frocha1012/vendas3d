@@ -7,10 +7,12 @@ import AddOrderForm from './components/AddOrderForm';
 import SummaryCard from './components/SummaryCard';
 import FilamentsManager from './components/FilamentsManager';
 import SettingsPage from './components/SettingsPage';
+import { useTheme } from './hooks/useTheme';
 
 const API_URL = '/api';
 
 function App() {
+  const { isDark, toggleTheme } = useTheme();
   const [items, setItems] = useState([]);
   const [orders, setOrders] = useState([]);
   const [filaments, setFilaments] = useState([]);
@@ -146,24 +148,47 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 transition-colors">
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-7xl">
-        <header className="mb-4 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-800 mb-1 sm:mb-2">Sales Tracker</h1>
-          <p className="text-sm sm:text-base text-slate-600">Track your items, orders, and profits</p>
+        <header className="mb-4 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100 mb-1 sm:mb-2">Sales Tracker</h1>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">Track your items, orders, and profits</p>
+          </div>
+          <button
+            onClick={toggleTheme}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors touch-manipulation min-h-[44px]"
+            aria-label="Toggle dark mode"
+          >
+            {isDark ? (
+              <>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <span className="text-sm font-medium">Light</span>
+              </>
+            ) : (
+              <>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                <span className="text-sm font-medium">Dark</span>
+              </>
+            )}
+          </button>
         </header>
 
         <SummaryCard summary={summary} />
 
         <div className="mt-4 sm:mt-8">
-          <div className="overflow-x-auto -mx-3 sm:mx-0 mb-4 sm:mb-6 border-b border-slate-200">
+          <div className="overflow-x-auto -mx-3 sm:mx-0 mb-4 sm:mb-6 border-b border-slate-200 dark:border-slate-700">
             <div className="flex space-x-1 sm:space-x-2 min-w-max px-3 sm:px-0">
               <button
                 onClick={() => setActiveTab('summary')}
                 className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
                   activeTab === 'summary'
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-slate-600 hover:text-slate-800'
+                    ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
                 Summary
@@ -172,8 +197,8 @@ function App() {
                 onClick={() => setActiveTab('items')}
                 className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
                   activeTab === 'items'
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-slate-600 hover:text-slate-800'
+                    ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
                 Items
@@ -182,8 +207,8 @@ function App() {
                 onClick={() => setActiveTab('orders')}
                 className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
                   activeTab === 'orders'
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-slate-600 hover:text-slate-800'
+                    ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
                 Orders
@@ -192,8 +217,8 @@ function App() {
                 onClick={() => setActiveTab('filaments')}
                 className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
                   activeTab === 'filaments'
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-slate-600 hover:text-slate-800'
+                    ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
                 Filaments
@@ -202,8 +227,8 @@ function App() {
                 onClick={() => setActiveTab('settings')}
                 className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
                   activeTab === 'settings'
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-slate-600 hover:text-slate-800'
+                    ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
                 Settings
@@ -212,31 +237,31 @@ function App() {
           </div>
 
           {activeTab === 'summary' && (
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="text-center p-4 bg-blue-50 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600">
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                     €{parseFloat(summary.total_profit || 0).toFixed(2)}
                   </div>
-                  <div className="text-sm text-slate-600 mt-1">Total Profit</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">Total Profit</div>
                 </div>
-                <div className="text-center p-4 bg-green-50 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600">
+                <div className="text-center p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                  <div className="text-2xl font-bold text-green-600 dark:text-green-400">
                     €{parseFloat(summary.total_revenue || 0).toFixed(2)}
                   </div>
-                  <div className="text-sm text-slate-600 mt-1">Total Revenue</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">Total Revenue</div>
                 </div>
-                <div className="text-center p-4 bg-red-50 rounded-lg">
-                  <div className="text-2xl font-bold text-red-600">
+                <div className="text-center p-4 bg-red-50 dark:bg-red-900/30 rounded-lg">
+                  <div className="text-2xl font-bold text-red-600 dark:text-red-400">
                     €{parseFloat(summary.total_cost || 0).toFixed(2)}
                   </div>
-                  <div className="text-sm text-slate-600 mt-1">Total Cost</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">Total Cost</div>
                 </div>
-                <div className="text-center p-4 bg-purple-50 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600">
+                <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg">
+                  <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                     {summary.total_orders || 0}
                   </div>
-                  <div className="text-sm text-slate-600 mt-1">Total Orders</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">Total Orders</div>
                 </div>
               </div>
             </div>

@@ -49,18 +49,18 @@ function AddOrderForm({ items, onAdd }) {
 
   if (items.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <p className="text-slate-500">Please add at least one item before adding orders.</p>
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 transition-colors">
+        <p className="text-slate-500 dark:text-slate-400">Please add at least one item before adding orders.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
-      <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 mb-3 sm:mb-4">Add New Order</h2>
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4 sm:p-6 transition-colors">
+      <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-3 sm:mb-4">Add New Order</h2>
       <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         <div>
-          <label htmlFor="order-item" className="block text-sm font-medium text-slate-700 mb-1">
+          <label htmlFor="order-item" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
             Item *
           </label>
           <select
@@ -75,7 +75,7 @@ function AddOrderForm({ items, onAdd }) {
                 }
               }
             }}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+            className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
             disabled={isSubmitting}
             required
           >
@@ -90,7 +90,7 @@ function AddOrderForm({ items, onAdd }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
-            <label htmlFor="quantity" className="block text-sm font-medium text-slate-700 mb-1">
+            <label htmlFor="quantity" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Quantity *
             </label>
             <input
@@ -99,14 +99,14 @@ function AddOrderForm({ items, onAdd }) {
               min="1"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               required
               disabled={isSubmitting}
             />
           </div>
 
           <div>
-            <label htmlFor="sale-date" className="block text-sm font-medium text-slate-700 mb-1">
+            <label htmlFor="sale-date" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Sale Date *
             </label>
             <input
@@ -114,7 +114,7 @@ function AddOrderForm({ items, onAdd }) {
               type="date"
               value={saleDate}
               onChange={(e) => setSaleDate(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               required
               disabled={isSubmitting}
             />
@@ -122,7 +122,7 @@ function AddOrderForm({ items, onAdd }) {
         </div>
 
         <div>
-          <label htmlFor="sale-price" className="block text-sm font-medium text-slate-700 mb-1">
+          <label htmlFor="sale-price" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
             Sale Price (per item) *
           </label>
           <input
@@ -132,13 +132,13 @@ function AddOrderForm({ items, onAdd }) {
             min="0"
             value={salePrice}
             onChange={(e) => setSalePrice(e.target.value)}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+            className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
             placeholder="0.00"
             required
             disabled={isSubmitting}
           />
           {selectedItem && salePrice && (
-            <p className="text-sm text-slate-600 mt-1">
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
               Build cost: €{parseFloat(selectedItem.build_price).toFixed(2)} | 
               Profit per item: €{(parseFloat(salePrice) - parseFloat(selectedItem.build_price)).toFixed(2)}
             </p>
@@ -146,28 +146,28 @@ function AddOrderForm({ items, onAdd }) {
         </div>
 
         {selectedItem && salePrice && quantity && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-4 transition-colors">
             <div className="flex justify-between items-center">
-              <span className="text-sm font-medium text-green-800">Estimated Profit:</span>
-              <span className="text-lg font-bold text-green-600">
+              <span className="text-sm font-medium text-green-800 dark:text-green-300">Estimated Profit:</span>
+              <span className="text-lg font-bold text-green-600 dark:text-green-400">
                 €{profit.toFixed(2)}
               </span>
             </div>
-            <div className="text-xs text-green-700 mt-1">
+            <div className="text-xs text-green-700 dark:text-green-400 mt-1">
               ({quantity} × €{parseFloat(salePrice).toFixed(2)}) - ({quantity} × €{parseFloat(selectedItem.build_price).toFixed(2)})
             </div>
           </div>
         )}
 
         <div>
-          <label htmlFor="notes" className="block text-sm font-medium text-slate-700 mb-1">
+          <label htmlFor="notes" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
             Notes (optional)
           </label>
           <textarea
             id="notes"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+            className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
             rows="3"
             placeholder="Additional notes about this order..."
             disabled={isSubmitting}
@@ -180,20 +180,20 @@ function AddOrderForm({ items, onAdd }) {
               type="checkbox"
               checked={paid}
               onChange={(e) => setPaid(e.target.checked)}
-              className="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+              className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500 bg-white dark:bg-slate-700"
               disabled={isSubmitting}
             />
-            <span className="text-sm font-medium text-slate-700">Paid</span>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Paid</span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={delivered}
               onChange={(e) => setDelivered(e.target.checked)}
-              className="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+              className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500 bg-white dark:bg-slate-700"
               disabled={isSubmitting}
             />
-            <span className="text-sm font-medium text-slate-700">Delivered</span>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Delivered</span>
           </label>
         </div>
 

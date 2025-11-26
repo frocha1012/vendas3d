@@ -1,7 +1,7 @@
 function SummaryCard({ summary }) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-6">
-      <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 mb-3 sm:mb-4">Overview</h2>
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-6 transition-colors">
+      <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-3 sm:mb-4">Overview</h2>
       
       {/* Main Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
@@ -27,12 +27,12 @@ function SummaryCard({ summary }) {
 
       {/* Revenue Breakdown */}
       <div className="flex justify-center mb-4 sm:mb-6">
-        <div className="bg-emerald-50 border-2 border-emerald-300 p-3 sm:p-4 rounded-lg w-full max-w-md text-center">
-          <div className="text-xs text-emerald-700 font-medium mb-1">Revenue (without expenses)</div>
-          <div className="text-xl sm:text-2xl font-bold text-emerald-800">
+        <div className="bg-emerald-50 dark:bg-emerald-900/30 border-2 border-emerald-300 dark:border-emerald-700 p-3 sm:p-4 rounded-lg w-full max-w-md text-center transition-colors">
+          <div className="text-xs text-emerald-700 dark:text-emerald-400 font-medium mb-1">Revenue (without expenses)</div>
+          <div className="text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-300">
             €{parseFloat(summary.revenue_without_labor || 0).toFixed(2)}
           </div>
-          <div className="text-xs text-emerald-600 mt-1">
+          <div className="text-xs text-emerald-600 dark:text-emerald-400 mt-1">
             Revenue - (Material + Electricity)
           </div>
         </div>
@@ -40,21 +40,21 @@ function SummaryCard({ summary }) {
 
       {/* Cost Breakdown */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-        <div className="bg-blue-50 border border-blue-200 p-3 sm:p-4 rounded-lg">
-          <div className="text-xs text-blue-600 font-medium mb-1">Material Cost</div>
-          <div className="text-lg sm:text-xl font-bold text-blue-700">
+        <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 p-3 sm:p-4 rounded-lg transition-colors">
+          <div className="text-xs text-blue-600 dark:text-blue-400 font-medium mb-1">Material Cost</div>
+          <div className="text-lg sm:text-xl font-bold text-blue-700 dark:text-blue-300">
             €{parseFloat(summary.total_material_cost || 0).toFixed(2)}
           </div>
         </div>
-        <div className="bg-orange-50 border border-orange-200 p-3 sm:p-4 rounded-lg">
-          <div className="text-xs text-orange-600 font-medium mb-1">Electricity Cost</div>
-          <div className="text-lg sm:text-xl font-bold text-orange-700">
+        <div className="bg-orange-50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-800 p-3 sm:p-4 rounded-lg transition-colors">
+          <div className="text-xs text-orange-600 dark:text-orange-400 font-medium mb-1">Electricity Cost</div>
+          <div className="text-lg sm:text-xl font-bold text-orange-700 dark:text-orange-300">
             €{parseFloat(summary.total_electricity_cost || 0).toFixed(2)}
           </div>
         </div>
-        <div className="bg-indigo-50 border border-indigo-200 p-3 sm:p-4 rounded-lg sm:col-span-2 md:col-span-1">
-          <div className="text-xs text-indigo-600 font-medium mb-1">Total Labor Cost</div>
-          <div className="text-lg sm:text-xl font-bold text-indigo-700">
+        <div className="bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 p-3 sm:p-4 rounded-lg sm:col-span-2 md:col-span-1 transition-colors">
+          <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mb-1">Total Labor Cost</div>
+          <div className="text-lg sm:text-xl font-bold text-indigo-700 dark:text-indigo-300">
             €{parseFloat(summary.total_labor_cost || 0).toFixed(2)}
           </div>
         </div>

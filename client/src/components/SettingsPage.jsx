@@ -71,9 +71,9 @@ function SettingsPage({ settings, onUpdate }) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4 sm:p-6 transition-colors">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
-        <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">3D Print Business Settings</h2>
+        <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 dark:text-slate-100">3D Print Business Settings</h2>
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
@@ -87,7 +87,7 @@ function SettingsPage({ settings, onUpdate }) {
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
               Default Hourly Rate (€)
             </label>
             {isEditing ? (
@@ -98,20 +98,20 @@ function SettingsPage({ settings, onUpdate }) {
                 name="default_hourly_rate"
                 value={formData.default_hourly_rate}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                 required
                 disabled={isSubmitting}
               />
             ) : (
-              <div className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-700">
+              <div className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300">
                 {formData.default_hourly_rate || '1.00'} €/hour
               </div>
             )}
-            <p className="text-xs text-slate-500">Hourly rate used for labor cost calculation</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Hourly rate used for labor cost calculation</p>
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
               Electricity Cost per kWh (€)
             </label>
             {isEditing ? (
@@ -122,20 +122,20 @@ function SettingsPage({ settings, onUpdate }) {
                 name="electricity_cost_per_kwh"
                 value={formData.electricity_cost_per_kwh}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                 required
                 disabled={isSubmitting}
               />
             ) : (
-              <div className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-700">
+              <div className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300">
                 {formData.electricity_cost_per_kwh || '0.25'} €/kWh
               </div>
             )}
-            <p className="text-xs text-slate-500">Cost per kilowatt-hour of electricity</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Cost per kilowatt-hour of electricity</p>
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
               Average Printer Power (W)
             </label>
             {isEditing ? (
@@ -146,20 +146,20 @@ function SettingsPage({ settings, onUpdate }) {
                 name="average_printer_power_w"
                 value={formData.average_printer_power_w}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                 required
                 disabled={isSubmitting}
               />
             ) : (
-              <div className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-700">
+              <div className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300">
                 {formData.average_printer_power_w || '250'} W
               </div>
             )}
-            <p className="text-xs text-slate-500">Average power consumption of your printer</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Average power consumption of your printer</p>
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
               Default Profit Margin (%)
             </label>
             {isEditing ? (
@@ -170,20 +170,20 @@ function SettingsPage({ settings, onUpdate }) {
                 name="default_profit_margin"
                 value={formData.default_profit_margin}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                 required
                 disabled={isSubmitting}
               />
             ) : (
-              <div className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-700">
+              <div className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300">
                 {formData.default_profit_margin || '50.00'}%
               </div>
             )}
-            <p className="text-xs text-slate-500">Default profit margin applied to items</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Default profit margin applied to items</p>
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
               Currency
             </label>
             {isEditing ? (
@@ -191,7 +191,7 @@ function SettingsPage({ settings, onUpdate }) {
                 name="currency"
                 value={formData.currency}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                 disabled={isSubmitting}
               >
                 <option value="EUR">EUR (€)</option>
@@ -200,16 +200,16 @@ function SettingsPage({ settings, onUpdate }) {
                 <option value="BRL">BRL (€)</option>
               </select>
             ) : (
-              <div className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-700">
+              <div className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300">
                 {formData.currency || 'EUR'}
               </div>
             )}
-            <p className="text-xs text-slate-500">Currency used throughout the app</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Currency used throughout the app</p>
           </div>
         </div>
 
         {isEditing && (
-          <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200">
+          <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">
             <button
               type="submit"
               disabled={isSubmitting}
@@ -221,7 +221,7 @@ function SettingsPage({ settings, onUpdate }) {
               type="button"
               onClick={handleCancel}
               disabled={isSubmitting}
-              className="flex-1 bg-slate-300 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-400 disabled:opacity-50 transition-colors touch-manipulation min-h-[44px]"
+              className="flex-1 bg-slate-300 dark:bg-slate-600 text-slate-700 dark:text-slate-200 px-6 py-3 rounded-lg hover:bg-slate-400 dark:hover:bg-slate-500 disabled:opacity-50 transition-colors touch-manipulation min-h-[44px]"
             >
               Cancel
             </button>
