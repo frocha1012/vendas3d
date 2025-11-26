@@ -86,6 +86,8 @@ CREATE TABLE IF NOT EXISTS orders (
   sale_price DECIMAL(10, 2) NOT NULL,
   sale_date DATE NOT NULL,
   notes TEXT,
+  paid BOOLEAN DEFAULT FALSE NOT NULL,
+  delivered BOOLEAN DEFAULT FALSE NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE,
   INDEX idx_item_id (item_id),

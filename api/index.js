@@ -250,6 +250,8 @@ app.get('/api/orders', async (req, res) => {
         o.sale_price,
         o.sale_date,
         o.notes,
+        o.paid,
+        o.delivered,
         o.created_at,
         i.name as item_name,
         i.color,
@@ -277,13 +279,13 @@ app.get('/api/orders', async (req, res) => {
 app.post('/api/orders', async (req, res) => {
   try {
     const pool = getPool();
-    const { item_id, quantity, sale_price, sale_date, notes } = req.body;
+    const { item_id, quantity, sale_price, sale_date, notes, paid, delivered } = req.body;
     if (!item_id || !quantity || sale_price === undefined || !sale_date) {
       return res.status(400).json({ error: 'item_id, quantity, sale_price, and sale_date are required' });
     }
     const [result] = await pool.execute(
-      'INSERT INTO orders (item_id, quantity, sale_price, sale_date, notes) VALUES (?, ?, ?, ?, ?)',
-      [item_id, quantity, sale_price, sale_date, notes || null]
+      'INSERT INTO orders (item_id, quantity, sale_price, sale_date, notes, paid, delivered) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [item_id, quantity, sale_price, sale_date, notes || null, paid ? 1 : 0, delivered ? 1 : 0]
     );
     res.status(201).json({ id: result.insertId, message: 'Order added successfully' });
   } catch (error) {
@@ -296,13 +298,13 @@ app.put('/api/orders/:id', async (req, res) => {
   try {
     const pool = getPool();
     const { id } = req.params;
-    const { item_id, quantity, sale_price, sale_date, notes } = req.body;
+    const { item_id, quantity, sale_price, sale_date, notes, paid, delivered } = req.body;
     if (!item_id || !quantity || sale_price === undefined || !sale_date) {
       return res.status(400).json({ error: 'item_id, quantity, sale_price, and sale_date are required' });
     }
     await pool.execute(
-      'UPDATE orders SET item_id = ?, quantity = ?, sale_price = ?, sale_date = ?, notes = ? WHERE id = ?',
-      [item_id, quantity, sale_price, sale_date, notes || null, id]
+      'UPDATE orders SET item_id = ?, quantity = ?, sale_price = ?, sale_date = ?, notes = ?, paid = ?, delivered = ? WHERE id = ?',
+      [item_id, quantity, sale_price, sale_date, notes || null, paid ? 1 : 0, delivered ? 1 : 0, id]
     );
     res.json({ message: 'Order updated successfully' });
   } catch (error) {

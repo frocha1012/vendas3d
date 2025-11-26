@@ -6,7 +6,9 @@ function EditOrderModal({ order, items, isOpen, onClose, onSave }) {
     quantity: '',
     sale_price: '',
     sale_date: '',
-    notes: ''
+    notes: '',
+    paid: false,
+    delivered: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -17,7 +19,9 @@ function EditOrderModal({ order, items, isOpen, onClose, onSave }) {
         quantity: order.quantity?.toString() || '1',
         sale_price: order.sale_price?.toString() || '',
         sale_date: order.sale_date || '',
-        notes: order.notes || ''
+        notes: order.notes || '',
+        paid: order.paid === 1 || order.paid === true || false,
+        delivered: order.delivered === 1 || order.delivered === true || false
       });
     }
   }, [order]);
@@ -36,7 +40,9 @@ function EditOrderModal({ order, items, isOpen, onClose, onSave }) {
         quantity: parseInt(formData.quantity),
         sale_price: parseFloat(formData.sale_price),
         sale_date: formData.sale_date,
-        notes: formData.notes.trim() || null
+        notes: formData.notes.trim() || null,
+        paid: formData.paid,
+        delivered: formData.delivered
       });
       onClose();
     } catch (error) {
@@ -48,8 +54,11 @@ function EditOrderModal({ order, items, isOpen, onClose, onSave }) {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({ 
+      ...prev, 
+      [name]: type === 'checkbox' ? checked : value 
+    }));
   };
 
   return (
@@ -177,6 +186,31 @@ function EditOrderModal({ order, items, isOpen, onClose, onSave }) {
               placeholder="Additional notes..."
               disabled={isSubmitting}
             />
+          </div>
+
+          <div className="flex gap-6">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                name="paid"
+                checked={formData.paid}
+                onChange={handleInputChange}
+                className="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+                disabled={isSubmitting}
+              />
+              <span className="text-sm font-medium text-slate-700">Paid</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                name="delivered"
+                checked={formData.delivered}
+                onChange={handleInputChange}
+                className="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+                disabled={isSubmitting}
+              />
+              <span className="text-sm font-medium text-slate-700">Delivered</span>
+            </label>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200 sticky bottom-0 bg-white -mx-4 sm:-mx-6 px-4 sm:px-6 pb-4 sm:pb-0">

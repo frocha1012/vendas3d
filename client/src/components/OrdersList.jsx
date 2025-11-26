@@ -44,6 +44,12 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
               <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Notes
               </th>
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">
+                Paid
+              </th>
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">
+                Delivered
+              </th>
               <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Actions
               </th>
@@ -95,6 +101,24 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
                 <td className="px-3 sm:px-6 py-3 sm:py-4">
                   <div className="text-xs sm:text-sm text-slate-600 max-w-xs truncate">
                     {order.notes || '-'}
+                  </div>
+                </td>
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-center">
+                  <div className="flex justify-center">
+                    {order.paid ? (
+                      <span className="text-green-600 text-lg">✓</span>
+                    ) : (
+                      <span className="text-slate-300 text-lg">○</span>
+                    )}
+                  </div>
+                </td>
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-center">
+                  <div className="flex justify-center">
+                    {order.delivered ? (
+                      <span className="text-green-600 text-lg">✓</span>
+                    ) : (
+                      <span className="text-slate-300 text-lg">○</span>
+                    )}
                   </div>
                 </td>
                 <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm">

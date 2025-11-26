@@ -6,6 +6,8 @@ function AddOrderForm({ items, onAdd }) {
   const [salePrice, setSalePrice] = useState('');
   const [saleDate, setSaleDate] = useState(new Date().toISOString().split('T')[0]);
   const [notes, setNotes] = useState('');
+  const [paid, setPaid] = useState(false);
+  const [delivered, setDelivered] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const selectedItem = items.find(item => item.id === parseInt(itemId));
@@ -27,13 +29,17 @@ function AddOrderForm({ items, onAdd }) {
         quantity: parseInt(quantity),
         sale_price: parseFloat(salePrice),
         sale_date: saleDate,
-        notes: notes.trim() || null
+        notes: notes.trim() || null,
+        paid: paid,
+        delivered: delivered
       });
       setItemId('');
       setQuantity('1');
       setSalePrice('');
       setSaleDate(new Date().toISOString().split('T')[0]);
       setNotes('');
+      setPaid(false);
+      setDelivered(false);
     } catch (error) {
       alert('Error adding order. Please try again.');
     } finally {
@@ -166,6 +172,29 @@ function AddOrderForm({ items, onAdd }) {
             placeholder="Additional notes about this order..."
             disabled={isSubmitting}
           />
+        </div>
+
+        <div className="flex gap-6">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={paid}
+              onChange={(e) => setPaid(e.target.checked)}
+              className="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+              disabled={isSubmitting}
+            />
+            <span className="text-sm font-medium text-slate-700">Paid</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={delivered}
+              onChange={(e) => setDelivered(e.target.checked)}
+              className="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+              disabled={isSubmitting}
+            />
+            <span className="text-sm font-medium text-slate-700">Delivered</span>
+          </label>
         </div>
 
         <button
