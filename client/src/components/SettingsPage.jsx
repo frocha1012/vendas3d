@@ -195,9 +195,9 @@ function SettingsPage({ settings, onUpdate }) {
                 disabled={isSubmitting}
               >
                 <option value="EUR">EUR (€)</option>
-                <option value="USD">USD ($)</option>
-                <option value="GBP">GBP (£)</option>
-                <option value="BRL">BRL (R$)</option>
+                <option value="USD">USD (€)</option>
+                <option value="GBP">GBP (€)</option>
+                <option value="BRL">BRL (€)</option>
               </select>
             ) : (
               <div className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-700">

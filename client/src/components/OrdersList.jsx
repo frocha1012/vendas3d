@@ -16,44 +16,44 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
       <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-200">
         <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">Orders List</h2>
       </div>
-      <div className="overflow-x-auto -mx-4 sm:mx-0">
-        <table className="w-full min-w-[900px]">
+      <div className="overflow-hidden">
+        <table className="w-full table-fixed">
           <thead className="bg-slate-50">
             <tr>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[8%]">
                 Date
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[10%]">
                 Item
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[5%]">
                 Qty
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[8%]">
                 Build Price
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[8%]">
                 Sale Price
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[8%]">
                 Total Paid
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[8%]">
                 Profit
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[8%]">
                 Profit (w/o)
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[15%]">
                 Notes
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider w-[5%]">
                 Paid
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider w-[5%]">
                 Delivered
               </th>
-              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider w-[10%]">
                 Actions
               </th>
             </tr>
@@ -107,7 +107,7 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
                   </div>
                 </td>
                 <td className="px-3 sm:px-6 py-3 sm:py-4">
-                  <div className="text-xs sm:text-sm text-slate-600 max-w-xs truncate">
+                  <div className="text-xs sm:text-sm text-slate-600 truncate" title={order.notes || ''}>
                     {order.notes || '-'}
                   </div>
                 </td>

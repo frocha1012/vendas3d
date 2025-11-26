@@ -82,7 +82,7 @@ function AddOrderForm({ items, onAdd }) {
             <option value="">Select an item</option>
             {items.map((item) => (
               <option key={item.id} value={item.id}>
-                {item.name} (Build: ${parseFloat(item.build_price).toFixed(2)})
+                {item.name} (Build: €{parseFloat(item.build_price).toFixed(2)})
               </option>
             ))}
           </select>
@@ -139,8 +139,8 @@ function AddOrderForm({ items, onAdd }) {
           />
           {selectedItem && salePrice && (
             <p className="text-sm text-slate-600 mt-1">
-              Build cost: ${parseFloat(selectedItem.build_price).toFixed(2)} | 
-              Profit per item: ${(parseFloat(salePrice) - parseFloat(selectedItem.build_price)).toFixed(2)}
+              Build cost: €{parseFloat(selectedItem.build_price).toFixed(2)} | 
+              Profit per item: €{(parseFloat(salePrice) - parseFloat(selectedItem.build_price)).toFixed(2)}
             </p>
           )}
         </div>
@@ -150,11 +150,11 @@ function AddOrderForm({ items, onAdd }) {
             <div className="flex justify-between items-center">
               <span className="text-sm font-medium text-green-800">Estimated Profit:</span>
               <span className="text-lg font-bold text-green-600">
-                ${profit.toFixed(2)}
+                €{profit.toFixed(2)}
               </span>
             </div>
             <div className="text-xs text-green-700 mt-1">
-              ({quantity} × ${parseFloat(salePrice).toFixed(2)}) - ({quantity} × ${parseFloat(selectedItem.build_price).toFixed(2)})
+              ({quantity} × €{parseFloat(salePrice).toFixed(2)}) - ({quantity} × €{parseFloat(selectedItem.build_price).toFixed(2)})
             </div>
           </div>
         )}
