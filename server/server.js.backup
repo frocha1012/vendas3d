@@ -1,0 +1,139 @@
+import express from 'express';
+import cors from 'cors';
+import pool from './database.js';
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(express.json());
+
+// Get all items
+app.get('/api/items', async (req, res) => {
+  try {
+    const [rows] = await pool.execute('SELECT * FROM items ORDER BY name ASC');
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching items:', error);
+    res.status(500).json({ error: 'Failed to fetch items' });
+  }
+});
+
+// Add new item
+app.post('/api/items', async (req, res) => {
+  try {
+    const { name, build_price } = req.body;
+    if (!name || build_price === undefined) {
+      return res.status(400).json({ error: 'Name and build_price are required' });
+    }
+    const [result] = await pool.execute(
+      'INSERT INTO items (name, build_price) VALUES (?, ?)',
+      [name, build_price]
+    );
+    res.status(201).json({ id: result.insertId, name, build_price });
+  } catch (error) {
+    console.error('Error adding item:', error);
+    let errorMessage = 'Failed to add item';
+    
+    if (error.code === 'ECONNREFUSED') {
+      errorMessage = 'Database connection failed. Check your DB_HOST in .env file. For Hostinger remote connections, you need the MySQL hostname (not localhost).';
+    } else if (error.code === 'ER_ACCESS_DENIED_ERROR') {
+      errorMessage = 'Database access denied. Please enable Remote MySQL access in Hostinger hPanel and add your IP address (77.54.71.74) to the allowed list.';
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
+    res.status(500).json({ error: errorMessage, code: error.code });
+  }
+});
+
+// Delete item
+app.delete('/api/items/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.execute('DELETE FROM items WHERE id = ?', [id]);
+    res.json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting item:', error);
+    res.status(500).json({ error: 'Failed to delete item' });
+  }
+});
+
+// Get all orders with item details
+app.get('/api/orders', async (req, res) => {
+  try {
+    const [rows] = await pool.execute(`
+      SELECT 
+        o.id,
+        o.item_id,
+        o.quantity,
+        o.sale_price,
+        o.sale_date,
+        o.notes,
+        o.created_at,
+        i.name as item_name,
+        i.build_price,
+        (o.sale_price - i.build_price) * o.quantity as profit
+      FROM orders o
+      JOIN items i ON o.item_id = i.id
+      ORDER BY o.sale_date DESC, o.created_at DESC
+    `);
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ error: 'Failed to fetch orders' });
+  }
+});
+
+// Add new order
+app.post('/api/orders', async (req, res) => {
+  try {
+    const { item_id, quantity, sale_price, sale_date, notes } = req.body;
+    if (!item_id || !quantity || sale_price === undefined || !sale_date) {
+      return res.status(400).json({ error: 'item_id, quantity, sale_price, and sale_date are required' });
+    }
+    const [result] = await pool.execute(
+      'INSERT INTO orders (item_id, quantity, sale_price, sale_date, notes) VALUES (?, ?, ?, ?, ?)',
+      [item_id, quantity, sale_price, sale_date, notes || null]
+    );
+    res.status(201).json({ id: result.insertId });
+  } catch (error) {
+    console.error('Error adding order:', error);
+    res.status(500).json({ error: 'Failed to add order' });
+  }
+});
+
+// Delete order
+app.delete('/api/orders/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.execute('DELETE FROM orders WHERE id = ?', [id]);
+    res.json({ message: 'Order deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting order:', error);
+    res.status(500).json({ error: 'Failed to delete order' });
+  }
+});
+
+// Get profit summary
+app.get('/api/summary', async (req, res) => {
+  try {
+    const [rows] = await pool.execute(`
+      SELECT 
+        SUM((o.sale_price - i.build_price) * o.quantity) as total_profit,
+        SUM(o.sale_price * o.quantity) as total_revenue,
+        SUM(i.build_price * o.quantity) as total_cost,
+        COUNT(o.id) as total_orders
+      FROM orders o
+      JOIN items i ON o.item_id = i.id
+    `);
+    res.json(rows[0] || { total_profit: 0, total_revenue: 0, total_cost: 0, total_orders: 0 });
+  } catch (error) {
+    console.error('Error fetching summary:', error);
+    res.status(500).json({ error: 'Failed to fetch summary' });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
