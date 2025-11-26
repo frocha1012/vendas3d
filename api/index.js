@@ -22,13 +22,13 @@ app.get('/api/settings', async (req, res) => {
     });
     res.json(settings);
   } catch (error) {
-    console.error('Error fetching settings:', error);
-    res.json({
-      default_hourly_rate: 1.0,
-      electricity_cost_per_kwh: 0.25,
-      average_printer_power_w: 250,
-      default_profit_margin: 50.0,
-      currency: 'EUR'
+    console.error('Error fetching settings:', error.message, error.code);
+    console.error('DB_HOST:', process.env.DB_HOST);
+    res.status(500).json({ 
+      error: 'Database connection failed',
+      message: error.message,
+      code: error.code,
+      dbHost: process.env.DB_HOST
     });
   }
 });
