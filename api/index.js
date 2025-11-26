@@ -311,20 +311,8 @@ app.get('/api/summary', async (req, res) => {
 });
 
 // Handle static file serving for React app
-const clientBuildPath = path.join(__dirname, '../../client/dist');
-
-// Serve static files from React build (with maxAge for caching)
-app.use(express.static(clientBuildPath, { maxAge: '1d' }));
-
-// Catch-all handler: serve React app for non-API routes
-app.get('*', (req, res) => {
-  // Don't serve index.html for API routes
-  if (req.path.startsWith('/api')) {
-    return res.status(404).json({ error: 'API endpoint not found' });
-  }
-  // Serve React app
-  res.sendFile(path.join(clientBuildPath, 'index.html'));
-});
+// In Vercel, static files are served separately, so we only handle API routes here
+// Static files are served by Vercel from the outputDirectory
 
 // Export for Vercel serverless
 export default app;
