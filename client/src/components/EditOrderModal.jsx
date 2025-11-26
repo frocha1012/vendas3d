@@ -14,11 +14,28 @@ function EditOrderModal({ order, items, isOpen, onClose, onSave }) {
 
   useEffect(() => {
     if (order) {
+      // Format date to YYYY-MM-DD for HTML date input
+      let formattedDate = '';
+      if (order.sale_date) {
+        if (order.sale_date instanceof Date) {
+          formattedDate = order.sale_date.toISOString().split('T')[0];
+        } else if (typeof order.sale_date === 'string') {
+          // Handle both "YYYY-MM-DD" and other date formats
+          const date = new Date(order.sale_date);
+          if (!isNaN(date.getTime())) {
+            formattedDate = date.toISOString().split('T')[0];
+          } else {
+            // If it's already in YYYY-MM-DD format, use it directly
+            formattedDate = order.sale_date.split('T')[0];
+          }
+        }
+      }
+      
       setFormData({
         item_id: order.item_id?.toString() || '',
         quantity: order.quantity?.toString() || '1',
         sale_price: order.sale_price?.toString() || '',
-        sale_date: order.sale_date || '',
+        sale_date: formattedDate,
         notes: order.notes || '',
         paid: order.paid === 1 || order.paid === true || false,
         delivered: order.delivered === 1 || order.delivered === true || false
