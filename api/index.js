@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import pool from '../server/database.js';
+import getPool from '../server/database.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,6 +15,7 @@ app.use(express.json());
 // Test database connection endpoint
 app.get('/api/test-db', async (req, res) => {
   try {
+    const pool = getPool();
     const [rows] = await pool.execute('SELECT 1 as test');
     res.json({ 
       success: true, 
@@ -39,6 +40,7 @@ app.get('/api/test-db', async (req, res) => {
 // ============ BUSINESS SETTINGS ============
 app.get('/api/settings', async (req, res) => {
   try {
+    const pool = getPool();
     const [rows] = await pool.execute('SELECT setting_key, setting_value FROM business_settings');
     const settings = {};
     rows.forEach(row => {
@@ -63,6 +65,7 @@ app.get('/api/settings', async (req, res) => {
 
 app.put('/api/settings', async (req, res) => {
   try {
+    const pool = getPool();
     const updates = req.body;
     for (const [key, value] of Object.entries(updates)) {
       await pool.execute(
@@ -80,6 +83,7 @@ app.put('/api/settings', async (req, res) => {
 // ============ FILAMENTS ============
 app.get('/api/filaments', async (req, res) => {
   try {
+    const pool = getPool();
     const [rows] = await pool.execute('SELECT * FROM filaments ORDER BY color_name');
     res.json(rows);
   } catch (error) {
@@ -90,6 +94,7 @@ app.get('/api/filaments', async (req, res) => {
 
 app.post('/api/filaments', async (req, res) => {
   try {
+    const pool = getPool();
     const { color_name, brand, material, diameter_mm, price_per_kg, cost_per_gram, notes } = req.body;
     if (!color_name || !price_per_kg) {
       return res.status(400).json({ error: 'Color name and price per kg are required' });
@@ -107,6 +112,7 @@ app.post('/api/filaments', async (req, res) => {
 
 app.put('/api/filaments/:id', async (req, res) => {
   try {
+    const pool = getPool();
     const { id } = req.params;
     const { color_name, brand, material, diameter_mm, price_per_kg, cost_per_gram, notes } = req.body;
     await pool.execute(
@@ -122,6 +128,7 @@ app.put('/api/filaments/:id', async (req, res) => {
 
 app.delete('/api/filaments/:id', async (req, res) => {
   try {
+    const pool = getPool();
     const { id } = req.params;
     await pool.execute('DELETE FROM filaments WHERE id = ?', [id]);
     res.json({ message: 'Filament deleted successfully' });
@@ -134,6 +141,7 @@ app.delete('/api/filaments/:id', async (req, res) => {
 // ============ ITEMS ============
 app.get('/api/items', async (req, res) => {
   try {
+    const pool = getPool();
     const [rows] = await pool.execute(`
       SELECT i.*, f.color_name as filament_color, f.brand as filament_brand
       FROM items i
@@ -158,6 +166,7 @@ app.post('/api/items', async (req, res) => {
       return res.status(400).json({ error: 'Item name is required' });
     }
 
+    const pool = getPool();
     const [settingsRows] = await pool.execute('SELECT setting_key, setting_value FROM business_settings');
     const settings = {};
     settingsRows.forEach(row => {
@@ -219,6 +228,7 @@ app.post('/api/items', async (req, res) => {
 
 app.delete('/api/items/:id', async (req, res) => {
   try {
+    const pool = getPool();
     const { id } = req.params;
     await pool.execute('DELETE FROM items WHERE id = ?', [id]);
     res.json({ message: 'Item deleted successfully' });
@@ -231,6 +241,7 @@ app.delete('/api/items/:id', async (req, res) => {
 // ============ ORDERS ============
 app.get('/api/orders', async (req, res) => {
   try {
+    const pool = getPool();
     const [rows] = await pool.execute(`
       SELECT 
         o.id,
@@ -265,6 +276,7 @@ app.get('/api/orders', async (req, res) => {
 
 app.post('/api/orders', async (req, res) => {
   try {
+    const pool = getPool();
     const { item_id, quantity, sale_price, sale_date, notes } = req.body;
     if (!item_id || !quantity || sale_price === undefined || !sale_date) {
       return res.status(400).json({ error: 'item_id, quantity, sale_price, and sale_date are required' });
@@ -282,6 +294,7 @@ app.post('/api/orders', async (req, res) => {
 
 app.put('/api/orders/:id', async (req, res) => {
   try {
+    const pool = getPool();
     const { id } = req.params;
     const { item_id, quantity, sale_price, sale_date, notes } = req.body;
     if (!item_id || !quantity || sale_price === undefined || !sale_date) {
@@ -300,6 +313,7 @@ app.put('/api/orders/:id', async (req, res) => {
 
 app.delete('/api/orders/:id', async (req, res) => {
   try {
+    const pool = getPool();
     const { id } = req.params;
     await pool.execute('DELETE FROM orders WHERE id = ?', [id]);
     res.json({ message: 'Order deleted successfully' });
@@ -312,6 +326,7 @@ app.delete('/api/orders/:id', async (req, res) => {
 // ============ SUMMARY ============
 app.get('/api/summary', async (req, res) => {
   try {
+    const pool = getPool();
     const [rows] = await pool.execute(`
       SELECT 
         SUM((o.sale_price * o.quantity) - ((COALESCE(i.material_cost, 0) + COALESCE(i.electricity_cost, 0)) * o.quantity)) as total_profit,
