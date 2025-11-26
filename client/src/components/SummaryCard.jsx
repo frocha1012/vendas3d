@@ -26,8 +26,8 @@ function SummaryCard({ summary }) {
       </div>
 
       {/* Revenue Breakdown */}
-      <div className="grid grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6">
-        <div className="bg-emerald-50 border-2 border-emerald-300 p-3 sm:p-4 rounded-lg">
+      <div className="flex justify-center mb-4 sm:mb-6">
+        <div className="bg-emerald-50 border-2 border-emerald-300 p-3 sm:p-4 rounded-lg w-full max-w-md text-center">
           <div className="text-xs text-emerald-700 font-medium mb-1">Revenue (without expenses)</div>
           <div className="text-xl sm:text-2xl font-bold text-emerald-800">
             €{parseFloat(summary.revenue_without_labor || 0).toFixed(2)}
