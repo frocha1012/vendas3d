@@ -71,21 +71,21 @@ function SettingsPage({ settings, onUpdate }) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold text-slate-800">3D Print Business Settings</h2>
+    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">3D Print Business Settings</h2>
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            className="bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors touch-manipulation min-h-[44px] w-full sm:w-auto"
           >
             Edit Settings
           </button>
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <div className="space-y-2">
             <label className="block text-sm font-medium text-slate-700">
               Default Hourly Rate (€)
@@ -209,11 +209,11 @@ function SettingsPage({ settings, onUpdate }) {
         </div>
 
         {isEditing && (
-          <div className="flex gap-3 pt-4 border-t border-slate-200">
+          <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation min-h-[44px]"
             >
               {isSubmitting ? 'Saving...' : 'Save Settings'}
             </button>
@@ -221,7 +221,7 @@ function SettingsPage({ settings, onUpdate }) {
               type="button"
               onClick={handleCancel}
               disabled={isSubmitting}
-              className="bg-slate-300 text-slate-700 px-6 py-2 rounded-lg hover:bg-slate-400 disabled:opacity-50 transition-colors"
+              className="flex-1 bg-slate-300 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-400 disabled:opacity-50 transition-colors touch-manipulation min-h-[44px]"
             >
               Cancel
             </button>

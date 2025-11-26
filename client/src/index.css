@@ -9,4 +9,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Improve touch targets on mobile */
+button, a {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }

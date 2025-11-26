@@ -50,9 +50,9 @@ function AddOrderForm({ items, onAdd }) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-semibold text-slate-800 mb-4">Add New Order</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+      <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 mb-3 sm:mb-4">Add New Order</h2>
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         <div>
           <label htmlFor="order-item" className="block text-sm font-medium text-slate-700 mb-1">
             Item *
@@ -82,7 +82,7 @@ function AddOrderForm({ items, onAdd }) {
           </select>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label htmlFor="quantity" className="block text-sm font-medium text-slate-700 mb-1">
               Quantity *
@@ -171,7 +171,7 @@ function AddOrderForm({ items, onAdd }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation min-h-[44px]"
         >
           {isSubmitting ? 'Adding...' : 'Add Order'}
         </button>

@@ -87,10 +87,10 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-semibold text-slate-800 mb-4">Add New Item</h2>
+    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+      <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 mb-3 sm:mb-4">Add New Item</h2>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         {/* Basic Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -272,7 +272,7 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full bg-blue-600 text-white py-3 sm:py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation min-h-[44px]"
         >
           {isSubmitting ? 'Adding...' : 'Add Item'}
         </button>

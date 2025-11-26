@@ -147,66 +147,68 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">Sales Tracker</h1>
-          <p className="text-slate-600">Track your items, orders, and profits</p>
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-7xl">
+        <header className="mb-4 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-800 mb-1 sm:mb-2">Sales Tracker</h1>
+          <p className="text-sm sm:text-base text-slate-600">Track your items, orders, and profits</p>
         </header>
 
         <SummaryCard summary={summary} />
 
-        <div className="mt-8">
-          <div className="flex space-x-2 mb-6 border-b border-slate-200">
-            <button
-              onClick={() => setActiveTab('summary')}
-              className={`px-6 py-3 font-medium transition-colors ${
-                activeTab === 'summary'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
-                  : 'text-slate-600 hover:text-slate-800'
-              }`}
-            >
-              Summary
-            </button>
-            <button
-              onClick={() => setActiveTab('items')}
-              className={`px-6 py-3 font-medium transition-colors ${
-                activeTab === 'items'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
-                  : 'text-slate-600 hover:text-slate-800'
-              }`}
-            >
-              Items
-            </button>
-            <button
-              onClick={() => setActiveTab('orders')}
-              className={`px-6 py-3 font-medium transition-colors ${
-                activeTab === 'orders'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
-                  : 'text-slate-600 hover:text-slate-800'
-              }`}
-            >
-              Orders
-            </button>
-            <button
-              onClick={() => setActiveTab('filaments')}
-              className={`px-6 py-3 font-medium transition-colors ${
-                activeTab === 'filaments'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
-                  : 'text-slate-600 hover:text-slate-800'
-              }`}
-            >
-              Filaments
-            </button>
-            <button
-              onClick={() => setActiveTab('settings')}
-              className={`px-6 py-3 font-medium transition-colors ${
-                activeTab === 'settings'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
-                  : 'text-slate-600 hover:text-slate-800'
-              }`}
-            >
-              Settings
-            </button>
+        <div className="mt-4 sm:mt-8">
+          <div className="overflow-x-auto -mx-3 sm:mx-0 mb-4 sm:mb-6 border-b border-slate-200">
+            <div className="flex space-x-1 sm:space-x-2 min-w-max px-3 sm:px-0">
+              <button
+                onClick={() => setActiveTab('summary')}
+                className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
+                  activeTab === 'summary'
+                    ? 'text-blue-600 border-b-2 border-blue-600'
+                    : 'text-slate-600 hover:text-slate-800'
+                }`}
+              >
+                Summary
+              </button>
+              <button
+                onClick={() => setActiveTab('items')}
+                className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
+                  activeTab === 'items'
+                    ? 'text-blue-600 border-b-2 border-blue-600'
+                    : 'text-slate-600 hover:text-slate-800'
+                }`}
+              >
+                Items
+              </button>
+              <button
+                onClick={() => setActiveTab('orders')}
+                className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
+                  activeTab === 'orders'
+                    ? 'text-blue-600 border-b-2 border-blue-600'
+                    : 'text-slate-600 hover:text-slate-800'
+                }`}
+              >
+                Orders
+              </button>
+              <button
+                onClick={() => setActiveTab('filaments')}
+                className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
+                  activeTab === 'filaments'
+                    ? 'text-blue-600 border-b-2 border-blue-600'
+                    : 'text-slate-600 hover:text-slate-800'
+                }`}
+              >
+                Filaments
+              </button>
+              <button
+                onClick={() => setActiveTab('settings')}
+                className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
+                  activeTab === 'settings'
+                    ? 'text-blue-600 border-b-2 border-blue-600'
+                    : 'text-slate-600 hover:text-slate-800'
+                }`}
+              >
+                Settings
+              </button>
+            </div>
           </div>
 
           {activeTab === 'summary' && (

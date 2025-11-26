@@ -117,17 +117,17 @@ function FilamentsManager({ filaments, onUpdate }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Add/Edit Form */}
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-semibold text-slate-800">
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4">
+          <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">
             {editingId ? 'Edit Filament' : 'Add New Filament'}
           </h2>
           {!isAdding && (
             <button
               onClick={() => setIsAdding(true)}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              className="bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors touch-manipulation min-h-[44px] w-full sm:w-auto"
             >
               + Add Filament
             </button>
@@ -135,8 +135,8 @@ function FilamentsManager({ filaments, onUpdate }) {
         </div>
 
         {isAdding && (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
                   Color Name *
@@ -238,11 +238,11 @@ function FilamentsManager({ filaments, onUpdate }) {
               </div>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation min-h-[44px]"
               >
                 {isSubmitting ? 'Saving...' : editingId ? 'Update' : 'Add'} Filament
               </button>
@@ -250,7 +250,7 @@ function FilamentsManager({ filaments, onUpdate }) {
                 type="button"
                 onClick={handleCancel}
                 disabled={isSubmitting}
-                className="bg-slate-300 text-slate-700 px-6 py-2 rounded-lg hover:bg-slate-400 disabled:opacity-50 transition-colors"
+                className="flex-1 bg-slate-300 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-400 disabled:opacity-50 transition-colors touch-manipulation min-h-[44px]"
               >
                 Cancel
               </button>
@@ -261,63 +261,67 @@ function FilamentsManager({ filaments, onUpdate }) {
 
       {/* Filaments List */}
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-200">
-          <h2 className="text-2xl font-semibold text-slate-800">Filaments List</h2>
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-200">
+          <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">Filaments List</h2>
         </div>
         {filaments.length === 0 ? (
-          <div className="p-8 text-center text-slate-500">
+          <div className="p-6 sm:p-8 text-center text-slate-500 text-sm sm:text-base">
             No filaments yet. Add your first filament to get started!
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full">
+          <div className="overflow-x-auto -mx-4 sm:mx-0">
+            <table className="w-full min-w-[600px]">
               <thead className="bg-slate-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Color</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Brand</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Material</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Diameter</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Price/kg</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Cost/gram</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Actions</th>
+                  <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase">Color</th>
+                  <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase">Brand</th>
+                  <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase">Material</th>
+                  <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase">Diameter</th>
+                  <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase">Price/kg</th>
+                  <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase">Cost/gram</th>
+                  <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-slate-200">
                 {filaments.map((filament) => (
                   <tr key={filament.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-slate-900">{filament.color_name}</div>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                      <div className="text-xs sm:text-sm font-medium text-slate-900">{filament.color_name}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-slate-600">{filament.brand}</div>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                      <div className="text-xs sm:text-sm text-slate-600">{filament.brand}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-slate-600">{filament.material}</div>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                      <div className="text-xs sm:text-sm text-slate-600">{filament.material}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-slate-600">{filament.diameter_mm} mm</div>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                      <div className="text-xs sm:text-sm text-slate-600">{filament.diameter_mm} mm</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-slate-600">€{parseFloat(filament.price_per_kg || 0).toFixed(2)}</div>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                      <div className="text-xs sm:text-sm text-slate-600">€{parseFloat(filament.price_per_kg || 0).toFixed(2)}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-blue-600">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                      <div className="text-xs sm:text-sm font-medium text-blue-600">
                         €{parseFloat(filament.cost_per_gram || 0).toFixed(6)}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <button
-                        onClick={() => handleEdit(filament)}
-                        className="text-blue-600 hover:text-blue-800 font-medium mr-4 transition-colors"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(filament.id, filament.color_name)}
-                        className="text-red-600 hover:text-red-800 font-medium transition-colors"
-                      >
-                        Delete
-                      </button>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm">
+                      <div className="flex gap-2 sm:gap-4">
+                        <button
+                          onClick={() => handleEdit(filament)}
+                          className="text-blue-600 hover:text-blue-800 font-medium transition-colors py-1 touch-manipulation"
+                          aria-label="Edit filament"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(filament.id, filament.color_name)}
+                          className="text-red-600 hover:text-red-800 font-medium transition-colors py-1 touch-manipulation"
+                          aria-label="Delete filament"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

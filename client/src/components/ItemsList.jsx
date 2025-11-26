@@ -9,35 +9,35 @@ function ItemsList({ items, onDelete }) {
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="px-6 py-4 border-b border-slate-200">
-        <h2 className="text-2xl font-semibold text-slate-800">Items List</h2>
+      <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-200">
+        <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">Items List</h2>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full">
+      <div className="overflow-x-auto -mx-4 sm:mx-0">
+        <table className="w-full min-w-[700px]">
           <thead className="bg-slate-50">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Name
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Color
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Filament
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Grams
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Print Time
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Costs
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Final Price
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Actions
               </th>
             </tr>
@@ -45,28 +45,28 @@ function ItemsList({ items, onDelete }) {
           <tbody className="bg-white divide-y divide-slate-200">
             {items.map((item) => (
               <tr key={item.id} className="hover:bg-slate-50 transition-colors">
-                <td className="px-4 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-slate-900">{item.name}</div>
+                <td className="px-3 sm:px-4 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm font-medium text-slate-900">{item.name}</div>
                 </td>
-                <td className="px-4 py-4 whitespace-nowrap">
-                  <div className="text-sm text-slate-600">{item.color || '-'}</div>
+                <td className="px-3 sm:px-4 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm text-slate-600">{item.color || '-'}</div>
                 </td>
-                <td className="px-4 py-4 whitespace-nowrap">
-                  <div className="text-sm text-slate-600">
+                <td className="px-3 sm:px-4 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm text-slate-600">
                     {item.filament_color || '-'}
                   </div>
                 </td>
-                <td className="px-4 py-4 whitespace-nowrap">
-                  <div className="text-sm text-slate-600">
+                <td className="px-3 sm:px-4 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm text-slate-600">
                     {item.grams_used ? `${item.grams_used}g` : '-'}
                   </div>
                 </td>
-                <td className="px-4 py-4 whitespace-nowrap">
-                  <div className="text-sm text-slate-600">
+                <td className="px-3 sm:px-4 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm text-slate-600">
                     {item.print_time_hours ? `${item.print_time_hours}h` : '-'}
                   </div>
                 </td>
-                <td className="px-4 py-4 whitespace-nowrap">
+                <td className="px-3 sm:px-4 py-3 sm:py-4 whitespace-nowrap">
                   <div className="text-xs text-slate-600 space-y-0.5">
                     {item.material_cost && (
                       <div>Mat: €{parseFloat(item.material_cost).toFixed(2)}</div>
@@ -84,8 +84,8 @@ function ItemsList({ items, onDelete }) {
                     )}
                   </div>
                 </td>
-                <td className="px-4 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-green-600">
+                <td className="px-3 sm:px-4 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm font-medium text-green-600">
                     {item.final_price 
                       ? `€${parseFloat(item.final_price).toFixed(2)}`
                       : item.build_price
@@ -94,14 +94,15 @@ function ItemsList({ items, onDelete }) {
                     }
                   </div>
                 </td>
-                <td className="px-4 py-4 whitespace-nowrap text-sm">
+                <td className="px-3 sm:px-4 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm">
                   <button
                     onClick={() => {
                       if (window.confirm(`Are you sure you want to delete "${item.name}"? This will also delete all related orders.`)) {
                         onDelete(item.id);
                       }
                     }}
-                    className="text-red-600 hover:text-red-800 font-medium transition-colors"
+                    className="text-red-600 hover:text-red-800 font-medium transition-colors py-1 touch-manipulation"
+                    aria-label="Delete item"
                   >
                     Delete
                   </button>

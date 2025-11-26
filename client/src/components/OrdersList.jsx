@@ -13,38 +13,38 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="px-6 py-4 border-b border-slate-200">
-        <h2 className="text-2xl font-semibold text-slate-800">Orders List</h2>
+      <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-200">
+        <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">Orders List</h2>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full">
+      <div className="overflow-x-auto -mx-4 sm:mx-0">
+        <table className="w-full min-w-[800px]">
           <thead className="bg-slate-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Date
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Item
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
-                Quantity
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+                Qty
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
-                Build Price (Cost)
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+                Build Price
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Sale Price
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Profit
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
-                Profit (w/o labor)
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+                Profit (w/o)
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Notes
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Actions
               </th>
             </tr>
@@ -52,19 +52,19 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
           <tbody className="bg-white divide-y divide-slate-200">
             {orders.map((order) => (
               <tr key={order.id} className="hover:bg-slate-50 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-slate-900">
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm text-slate-900">
                     {new Date(order.sale_date).toLocaleDateString()}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-slate-900">{order.item_name}</div>
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm font-medium text-slate-900">{order.item_name}</div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-slate-600">{order.quantity}</div>
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm text-slate-600">{order.quantity}</div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-slate-600">
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm text-slate-600">
                     {order.build_price !== null && order.build_price !== undefined 
                       ? `€${parseFloat(order.build_price).toFixed(2)}`
                       : order.material_cost !== null || order.labor_cost !== null || order.electricity_cost !== null
@@ -73,35 +73,36 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
                     }
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-slate-600">
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm text-slate-600">
                     €{parseFloat(order.sale_price).toFixed(2)}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className={`text-sm font-medium ${
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                  <div className={`text-xs sm:text-sm font-medium ${
                     parseFloat(order.profit_with_labor || 0) >= 0 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     €{parseFloat(order.profit_with_labor || 0).toFixed(2)}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className={`text-sm font-medium ${
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                  <div className={`text-xs sm:text-sm font-medium ${
                     parseFloat(order.profit_without_labor || 0) >= 0 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     €{parseFloat(order.profit_without_labor || 0).toFixed(2)}
                   </div>
                 </td>
-                <td className="px-6 py-4">
-                  <div className="text-sm text-slate-600 max-w-xs truncate">
+                <td className="px-3 sm:px-6 py-3 sm:py-4">
+                  <div className="text-xs sm:text-sm text-slate-600 max-w-xs truncate">
                     {order.notes || '-'}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <div className="flex gap-3">
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm">
+                  <div className="flex gap-2 sm:gap-3">
                     <button
                       onClick={() => setEditingOrder(order)}
-                      className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                      className="text-blue-600 hover:text-blue-800 font-medium transition-colors py-1 px-1 sm:px-0 touch-manipulation"
+                      aria-label="Edit order"
                     >
                       Edit
                     </button>
@@ -111,7 +112,8 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
                           onDelete(order.id);
                         }
                       }}
-                      className="text-red-600 hover:text-red-800 font-medium transition-colors"
+                      className="text-red-600 hover:text-red-800 font-medium transition-colors py-1 px-1 sm:px-0 touch-manipulation"
+                      aria-label="Delete order"
                     >
                       Delete
                     </button>
