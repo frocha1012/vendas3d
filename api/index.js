@@ -311,10 +311,10 @@ app.get('/api/summary', async (req, res) => {
 });
 
 // Handle static file serving for React app
-const clientBuildPath = path.join(__dirname, '../client/dist');
+const clientBuildPath = path.join(__dirname, '../../client/dist');
 
-// Serve static files from React build
-app.use(express.static(clientBuildPath));
+// Serve static files from React build (with maxAge for caching)
+app.use(express.static(clientBuildPath, { maxAge: '1d' }));
 
 // Catch-all handler: serve React app for non-API routes
 app.get('*', (req, res) => {
