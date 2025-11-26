@@ -264,7 +264,8 @@ app.get('/api/orders', async (req, res) => {
           i.build_price,
           COALESCE(i.material_cost, 0) + COALESCE(i.labor_cost, 0) + COALESCE(i.electricity_cost, 0)
         )) * o.quantity as profit_with_labor,
-        (o.sale_price - (COALESCE(i.material_cost, 0) + COALESCE(i.electricity_cost, 0))) * o.quantity as profit_without_labor
+        (o.sale_price - (COALESCE(i.material_cost, 0) + COALESCE(i.electricity_cost, 0))) * o.quantity as profit_without_labor,
+        (o.sale_price * o.quantity) as total_paid
       FROM orders o
       JOIN items i ON o.item_id = i.id
       ORDER BY o.sale_date DESC, o.created_at DESC

@@ -17,7 +17,7 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
         <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">Orders List</h2>
       </div>
       <div className="overflow-x-auto -mx-4 sm:mx-0">
-        <table className="w-full min-w-[800px]">
+        <table className="w-full min-w-[900px]">
           <thead className="bg-slate-50">
             <tr>
               <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
@@ -34,6 +34,9 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
               </th>
               <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Sale Price
+              </th>
+              <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
+                Total Paid
               </th>
               <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">
                 Profit
@@ -82,6 +85,11 @@ function OrdersList({ orders, items, onDelete, onUpdate }) {
                 <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
                   <div className="text-xs sm:text-sm text-slate-600">
                     €{parseFloat(order.sale_price).toFixed(2)}
+                  </div>
+                </td>
+                <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
+                  <div className="text-xs sm:text-sm font-medium text-blue-600">
+                    €{parseFloat(order.total_paid || (order.sale_price * order.quantity)).toFixed(2)}
                   </div>
                 </td>
                 <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
