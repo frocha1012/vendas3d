@@ -75,14 +75,22 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
     }
   };
 
-  // Auto-calculate electricity based on print time if not provided
+  // Auto-calculate electricity based on print time
   const handlePrintTimeChange = (value) => {
     setPrintTimeHours(value);
-    if (!electricityKw && value && settings.average_printer_power_w) {
-      // Calculate: (power in kW) * (hours)
-      const powerKw = (settings.average_printer_power_w / 1000);
-      const calculatedKw = powerKw * parseFloat(value);
-      setElectricityKw(calculatedKw.toFixed(4));
+    // Always recalculate electricity from hours
+    if (value && settings.average_printer_power_w) {
+      const parsedHours = parseFloat(value);
+      if (!isNaN(parsedHours)) {
+        // Calculate: (power in kW) * (hours)
+        const powerKw = (settings.average_printer_power_w / 1000);
+        const calculatedKw = powerKw * parsedHours;
+        setElectricityKw(calculatedKw.toFixed(4));
+      } else {
+        setElectricityKw('');
+      }
+    } else {
+      setElectricityKw('');
     }
   };
 
@@ -216,13 +224,13 @@ function AddItemForm({ onAdd, filaments = [], settings = {} }) {
               step="0.0001"
               min="0"
               value={electricityKw}
-              onChange={(e) => setElectricityKw(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-              placeholder="Auto-calculated"
+              readOnly
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700/50 text-slate-900 dark:text-slate-100 cursor-not-allowed transition"
+              placeholder="Auto-calculated from hours"
               disabled={isSubmitting}
             />
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              Cost: €{(electricityKw ? parseFloat(electricityKw) * (settings.electricity_cost_per_kwh || 0.25) : 0).toFixed(4)}/kWh
+              Cost: €{(electricityKw ? parseFloat(electricityKw) * (settings.electricity_cost_per_kwh || 0.25) : 0).toFixed(4)}
             </p>
           </div>
           
