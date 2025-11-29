@@ -326,6 +326,82 @@ app.delete('/api/orders/:id', async (req, res) => {
   }
 });
 
+// ============ NOTES ============
+app.get('/api/notes', async (req, res) => {
+  try {
+    const pool = getPool();
+    const [rows] = await pool.execute('SELECT id, title, content, created_at, updated_at FROM notes ORDER BY updated_at DESC');
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching notes:', error);
+    res.json([]);
+  }
+});
+
+app.get('/api/notes/:id', async (req, res) => {
+  try {
+    const pool = getPool();
+    const { id } = req.params;
+    const [rows] = await pool.execute('SELECT * FROM notes WHERE id = ?', [id]);
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Note not found' });
+    }
+    res.json(rows[0]);
+  } catch (error) {
+    console.error('Error fetching note:', error);
+    res.status(500).json({ error: 'Failed to fetch note' });
+  }
+});
+
+app.post('/api/notes', async (req, res) => {
+  try {
+    const pool = getPool();
+    const { title, content } = req.body;
+    if (!title || !title.trim()) {
+      return res.status(400).json({ error: 'Title is required' });
+    }
+    const [result] = await pool.execute(
+      'INSERT INTO notes (title, content) VALUES (?, ?)',
+      [title.trim(), content || '']
+    );
+    res.status(201).json({ id: result.insertId, message: 'Note created successfully' });
+  } catch (error) {
+    console.error('Error creating note:', error);
+    res.status(500).json({ error: 'Failed to create note' });
+  }
+});
+
+app.put('/api/notes/:id', async (req, res) => {
+  try {
+    const pool = getPool();
+    const { id } = req.params;
+    const { title, content } = req.body;
+    if (!title || !title.trim()) {
+      return res.status(400).json({ error: 'Title is required' });
+    }
+    await pool.execute(
+      'UPDATE notes SET title = ?, content = ? WHERE id = ?',
+      [title.trim(), content || '', id]
+    );
+    res.json({ message: 'Note updated successfully' });
+  } catch (error) {
+    console.error('Error updating note:', error);
+    res.status(500).json({ error: 'Failed to update note' });
+  }
+});
+
+app.delete('/api/notes/:id', async (req, res) => {
+  try {
+    const pool = getPool();
+    const { id } = req.params;
+    await pool.execute('DELETE FROM notes WHERE id = ?', [id]);
+    res.json({ message: 'Note deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting note:', error);
+    res.status(500).json({ error: 'Failed to delete note' });
+  }
+});
+
 // ============ SUMMARY ============
 app.get('/api/summary', async (req, res) => {
   try {

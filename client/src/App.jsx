@@ -7,6 +7,7 @@ import AddOrderForm from './components/AddOrderForm';
 import SummaryCard from './components/SummaryCard';
 import FilamentsManager from './components/FilamentsManager';
 import SettingsPage from './components/SettingsPage';
+import NotesPad from './components/NotesPad';
 import { useTheme } from './hooks/useTheme';
 
 const API_URL = '/api';
@@ -224,6 +225,16 @@ function App() {
                 Filaments
               </button>
               <button
+                onClick={() => setActiveTab('notes')}
+                className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
+                  activeTab === 'notes'
+                    ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                }`}
+              >
+                Notes
+              </button>
+              <button
                 onClick={() => setActiveTab('settings')}
                 className={`px-3 sm:px-6 py-2.5 sm:py-3 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
                   activeTab === 'settings'
@@ -298,6 +309,10 @@ function App() {
                 fetchItems(); // Refresh items to update filament names
               }} 
             />
+          )}
+
+          {activeTab === 'notes' && (
+            <NotesPad />
           )}
 
           {activeTab === 'settings' && (
